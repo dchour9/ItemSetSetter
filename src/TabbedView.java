@@ -177,12 +177,6 @@ public class TabbedView extends JPanel implements ActionListener  {
 	}
 
 	public static void main(String[]args) throws RiotApiException, FileNotFoundException, UnsupportedEncodingException {
-		RiotApi api = new RiotApi(API_KEY);
-
-		//		Map<String, Summoner> summoners = api.getSummonersByName(Region.NA, "belgabad");
-		//		Summoner summoner = summoners.get("belgabad");
-		//		long id = summoner.getId();
-		//		System.out.println(id);
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				//Turn off metal's use of bold fonts
@@ -190,16 +184,8 @@ public class TabbedView extends JPanel implements ActionListener  {
 				createAndShowGUI();
 			}
 		});
-
-
 		writer = new PrintWriter("rec.json", "UTF-8");
 		writer.println(newHeader("Default"));
-
-
-
-
-
-
 	}
 	public static String newHeader(String name) {
 		String str = "{\n"
@@ -294,7 +280,11 @@ public class TabbedView extends JPanel implements ActionListener  {
 			selectedChampions.add(b);
 			selectedChampions.revalidate();
 			champions.add(e.getActionCommand().substring(5));
-		} 
+		}
+		else if (e.getActionCommand().contains("Sel")) {
+			items.remove(newItem(Integer.parseInt(e.getActionCommand())));
+			
+		}
 		else if(e.getActionCommand().equals("Next")) {
 
 		}
@@ -309,6 +299,7 @@ public class TabbedView extends JPanel implements ActionListener  {
 			ImageIcon img = new ImageIcon(image.getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 			items.add(newItem(Integer.parseInt(e.getActionCommand())));
 			JButton b = new JButton(img);
+			b.setActionCommand("Sel" + e.getActionCommand());
 			b.setContentAreaFilled(false);
 			b.setBorder(null);
 			selectedItems.add(b);
