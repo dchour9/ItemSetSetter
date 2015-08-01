@@ -11,8 +11,10 @@ Item Set Manager for League of Legends
 * And more...
 
 # How to use
-Currently, the jar file is up to date. You must download all the required files  
+Currently, the jar file is up to date. You must download all the required files nad directories:  
     `championIds.txt`  
     `championNames.txt`  
-    `itemsComplete.txt`  
+    `itemsComplete.txt`
+    `itemIds\`
+    `champIds\`
 Run the .jar and it will run the GUI. Click the finish button to complete the item set and close the GUI.
