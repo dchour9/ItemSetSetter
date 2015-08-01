@@ -11,7 +11,7 @@ import com.google.gson.JsonParser;
 public class CreateLists {
 	public static String[] champNames;
 	public static void createChampionListFromJsonURL() throws MalformedURLException, IOException {
-		Scanner fromUrl = new Scanner(new URL("https://na.api.pvp.net/api/lol/na/v1.2/champion?api_key=449b1ef2-d95b-4cb0-afe5-2b45b159f26d").openStream(), "UTF-8");
+		Scanner fromUrl = new Scanner(new URL("https://na.api.pvp.net/api/lol/na/v1.2/champion?api_key=" + TabbedView.API_KEY).openStream(), "UTF-8");
 		String out = fromUrl.useDelimiter("\\A").next();
 		champNames = out.split("},");
 		File champIds = null;
