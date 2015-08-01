@@ -10,8 +10,8 @@ Item Set Manager for League of Legends
 * Add removing items (in process)
 * Auto tab switching
 * Clean up code to make it easier to keep updated
-* And more...
-* 
+* And more...  
+
 # Long term:
 * Cleaner GUI
 * Edit existing Item Sets
