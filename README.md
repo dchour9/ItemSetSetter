@@ -12,13 +12,13 @@ Item Set Manager for League of Legends
 * Clean up code to make it easier to keep updated
 * And more...  
 
-# Long term:
+# Long term
 * Cleaner GUI
 * Edit existing Item Sets
 * Small tweaks
 
 # How to use
-Currently, the jar file is up to date. You must download all the required files nad directories:  
+Currently, the jar file is up to date. You must download all the required files and directories:  
     `championIds.txt`  
     `championNames.txt`  
     `itemsComplete.txt`  
