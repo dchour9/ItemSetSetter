@@ -10,16 +10,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,22 +25,9 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import constant.Region;
-
-import dto.Summoner.Summoner;
-
-import main.java.riotapi.RiotApi;
 import main.java.riotapi.RiotApiException;
 
-import com.google.gson.*;
-
-//starter
-//tools
-//defense
-//attack
-//magic
-//movement
-
+@SuppressWarnings("serial")
 public class TabbedView extends JPanel implements ActionListener  {
 
 	//	public static JButton boots, bfSword, done;
@@ -59,11 +42,16 @@ public class TabbedView extends JPanel implements ActionListener  {
 
 	public TabbedView() {
 
+		try { 
+		    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+		}
 		setLayout(new GridLayout(1,1));
 
 		tab = new JTabbedPane();
 		JPanel itemTab = new JPanel(new BorderLayout());
 		JPanel items = new JPanel();
+		JScrollPane itemScroll = new JScrollPane(items);
 		JPanel championTab = new JPanel(new BorderLayout());
 		JPanel champions = new JPanel();
 		selectedChampions = new JPanel();
@@ -71,6 +59,7 @@ public class TabbedView extends JPanel implements ActionListener  {
 		selectedChampions.setPreferredSize(new Dimension(500,100));
 		selectedItems.setPreferredSize(new Dimension(500,100));
 		items.setPreferredSize(new Dimension(500,800));
+		itemScroll.setPreferredSize(new Dimension(500,800));
 		champions.setPreferredSize(new Dimension(500,400));
 		//		container.setSize(800, getComponentCount());
 
@@ -78,14 +67,14 @@ public class TabbedView extends JPanel implements ActionListener  {
 		JButton b = new JButton ();
 
 		try {
-			ItemReader.main(new String[0]);
+			ToArrayLists.main(new String[0]);
 		} catch (NumberFormatException e) {
 		} catch (IOException e) {
 		}
 		/**
 		 * Adds champion buttons to the champion JPanel
 		 */
-		for(String champ: ItemReader.championKeys) {
+		for(String champ: ToArrayLists.championKeys) {
 			Image image = null;
 
 			try {
@@ -106,7 +95,7 @@ public class TabbedView extends JPanel implements ActionListener  {
 		/**
 		 * Adds item buttons to the items JPanel
 		 */
-		for(Integer item: ItemReader.items) {
+		for(Integer item: ToArrayLists.items) {
 			Image image = null;
 
 			try {
@@ -142,7 +131,7 @@ public class TabbedView extends JPanel implements ActionListener  {
 
 		championTab.add(champions,BorderLayout.NORTH);
 		championTab.add(selectedChampions, BorderLayout.SOUTH);
-		itemTab.add(items, BorderLayout.NORTH);
+		itemTab.add(itemScroll, BorderLayout.NORTH);
 		itemTab.add(selectedItems, BorderLayout.SOUTH);
 		tab.addTab("Champions", championTab);
 		tab.addTab("Items", itemTab);
@@ -165,7 +154,7 @@ public class TabbedView extends JPanel implements ActionListener  {
 		BufferedImage img = null;
 		Random rng = new Random();
 		try {
-			img = ImageIO.read(new File("champIds\\" + ItemReader.championKeys.get(rng.nextInt(ItemReader.championKeys.size()-1)) + ".jpg"));
+			img = ImageIO.read(new File("champIds\\" + ToArrayLists.championKeys.get(rng.nextInt(ToArrayLists.championKeys.size()-1)) + ".jpg"));
 			frame.setIconImage(img);
 		} catch (IOException e) {
 			System.out.println("No file found");
