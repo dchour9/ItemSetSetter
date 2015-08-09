@@ -1,3 +1,6 @@
+# This repository is not up to date. The up-to-date files are on my desktop waiting to be pushed. The repository is bugged and will not allow syncing or pushing.
+
+
 # ItemSetSetter
 Item Set Manager for League of Legends
 
