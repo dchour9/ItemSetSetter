@@ -31,7 +31,7 @@ import main.java.riotapi.RiotApiException;
 public class TabbedView extends JPanel implements ActionListener  {
 
 	//	public static JButton boots, bfSword, done;
-	public static final String API_KEY = "key";
+	public static final String API_KEY = "449b1ef2-d95b-4cb0-afe5-2b45b159f26d";
 	public static String championId = "MonkeyKing";
 	public static ArrayList<String> items = new ArrayList<String>();
 	public static ArrayList<String> champions = new ArrayList<String>();

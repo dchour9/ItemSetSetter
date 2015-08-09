@@ -59,3 +59,9 @@ $RECYCLE.BIN/
 
 # Files
 ItemSetGUI.java
+Update.java
+CreateDBs.java
+Champions.json
+Items.json
+
+/bin/
