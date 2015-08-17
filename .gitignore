@@ -57,7 +57,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# Files
+# Custom Files
+# =========================
 ItemSetGUI.java
 Update.java
 CreateDBs.java
@@ -66,5 +67,10 @@ Items.json
 rec.json
 src/com/resources/
 src/com/update/
+maps.json
+notes.txt
+champIds/
+itemIds/
+
 
 /bin/
