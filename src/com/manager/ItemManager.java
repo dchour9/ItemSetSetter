@@ -1,5 +1,6 @@
 package com.manager;
 
+import com.resources.ToArrayLists;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -66,6 +67,7 @@ public class ItemManager extends JPanel implements ActionListener  {
 	JsonObject itemObj = new JsonObject();	
 	Gson gson = new GsonBuilder().setPrettyPrinting().create();
 	ArrayList<String> championsList = new ArrayList<String>(), items = new ArrayList<String>();
+//	public static ArrayList<String> championKeys = new ArrayList<String>();
 	JFileChooser fc;
 	JComboBox<String> chBox, itBox, mapBox; 
 	JButton openButton;
@@ -75,7 +77,7 @@ public class ItemManager extends JPanel implements ActionListener  {
 
 
 	public ItemManager() {
-
+		
 		try { 
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
@@ -139,13 +141,13 @@ public class ItemManager extends JPanel implements ActionListener  {
 		 * Adds champion buttons to the champion JPanel
 		 */
 		Image image = null;
-		for(String champ: com.resources.ToArrayLists.championKeys) {
+		for(String champ: ToArrayLists.championKeys) {
 
 
 			try {
 				image = ImageIO.read(new File("champIds\\" + champ + ".jpg"));
 			} catch (IOException e) {
-
+				System.out.println(champ);
 			}
 			ImageIcon img = new ImageIcon(image.getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 
@@ -412,7 +414,7 @@ public class ItemManager extends JPanel implements ActionListener  {
 			champions.removeAll();
 			champions.revalidate();
 			champions.repaint();
-			for(String champ: com.resources.ToArrayLists.championKeys) {
+			for(String champ: ToArrayLists.championKeys) {
 
 				try {
 					image = ImageIO.read(new File("champIds\\" + champ + ".jpg"));
@@ -492,31 +494,29 @@ public class ItemManager extends JPanel implements ActionListener  {
 						try {
 							image = ImageIO.read(new File("itemIds\\" + id + ".jpg"));
 						} catch (IOException e) {
-							System.out.println("Fail");
+							System.out.println("Fail: " + id);
 						}
 						ImageIcon img = new ImageIcon(image.getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 						JButton b = new JButton(img);
 						b.setBorder(null);
-						System.out.println(id);
 						b.setActionCommand(id);
 						b.setContentAreaFilled(false);
 						b.addActionListener(this);
 						ItemManager.itemsPanel.add(b);
 					}
-				}
+				} 
 				break;
 			}
 		}
 	}
 
 	private void createPanelChampions(String tag) throws IOException {
+		
 		champions.removeAll();
 		champions.repaint();
 		if(tag.equals("Categories...")) {
 			Image image = null;
-			for(String champ: com.resources.ToArrayLists.championKeys) {
-
-
+			for(String champ: ToArrayLists.championKeys) {
 				try {
 					image = ImageIO.read(new File("champIds\\" + champ + ".jpg"));
 				} catch (IOException e) {
@@ -544,11 +544,10 @@ public class ItemManager extends JPanel implements ActionListener  {
 			for(Entry<String, JsonElement> ele: data.entrySet()) {
 				if(ele.getValue().getAsJsonObject().get("tags").getAsJsonArray().contains(parser.parse(tag))) {
 					Image image = null;
-					System.out.println(ele.getKey());
 					try {
 						image = ImageIO.read(new File("champIds\\" + ele.getKey() + ".jpg"));
 					} catch (IOException e) {
-						System.out.println("Fail");
+						System.out.println("Failed " + ele.getKey());
 					}
 					ImageIcon img = new ImageIcon(image.getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 					JButton b = new JButton(img);
@@ -582,13 +581,11 @@ public class ItemManager extends JPanel implements ActionListener  {
 					try {
 						image = ImageIO.read(new File("itemIds\\" + id + ".jpg"));
 					} catch (IOException e) {
-						System.out.println("Fail");
+						System.out.println("Failed " + id);
 					}
-					System.out.println(id);
 					ImageIcon img = new ImageIcon(image.getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 					JButton b = new JButton(img);
 					b.setBorder(null);
-					System.out.println(id);
 					b.setActionCommand(id);
 					b.setContentAreaFilled(false);
 					b.addActionListener(this);
@@ -607,7 +604,6 @@ public class ItemManager extends JPanel implements ActionListener  {
 	 * @throws IOException
 	 */
 	private void createPanelMap(int map, String tag) throws IOException {
-		System.out.println("Map");
 		itemsPanel.removeAll();
 		itemsPanel.repaint();
 		File f = new File(".\\items.json");
@@ -629,18 +625,16 @@ public class ItemManager extends JPanel implements ActionListener  {
 				for(Entry<String, JsonElement> item: ((JsonObject)ele.getValue()).entrySet()) {
 					if((item.getValue().getAsJsonObject().has("tags") && item.getValue().getAsJsonObject().get("tags").getAsJsonArray().contains(parser.parse(tag))
 							&& !mapSpecific.contains(item.getValue().getAsJsonObject().get("id"))) || (tag.equals("Any"))&& !mapSpecific.contains(item.getValue().getAsJsonObject().get("id"))) {
-						System.out.println("After bool");
 						String id = item.getValue().getAsJsonObject().get("id").toString();
 						Image image = null;
 						try {
 							image = ImageIO.read(new File("itemIds\\" + id + ".jpg"));
 						} catch (IOException e) {
-							System.out.println("Fail");
+							System.out.println("Failed " + id);
 						}
 						ImageIcon img = new ImageIcon(image.getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 						JButton b = new JButton(img);
 						b.setBorder(null);
-						System.out.println(id);
 						b.setActionCommand(id);
 						b.setContentAreaFilled(false);
 						b.addActionListener(this);
@@ -650,7 +644,6 @@ public class ItemManager extends JPanel implements ActionListener  {
 				break;
 			}
 		}
-		System.out.println("Map");
 	}
 
 	private JMenuBar createMenuBar() {
@@ -678,9 +671,8 @@ public class ItemManager extends JPanel implements ActionListener  {
 		BufferedImage img = null;
 		Random rng = new Random();
 		try {
-			int idx = com.resources.ToArrayLists.championKeys.size()-1;
-			System.out.println(idx);
-			img = ImageIO.read(new File("champIds\\" + com.resources.ToArrayLists.championKeys.get(rng.nextInt(idx)) + ".jpg"));
+			int idx = ToArrayLists.championKeys.size() - 1;
+			img = ImageIO.read(new File("champIds\\" + ToArrayLists.championKeys.get(rng.nextInt(idx)) + ".jpg"));
 			frame.setIconImage(img);
 		} catch (IOException e) {
 			System.out.println("No file found");
@@ -692,7 +684,7 @@ public class ItemManager extends JPanel implements ActionListener  {
 		frame.setResizable(false);
 	}
 
-	public static void main(String[]args) throws RiotApiException, FileNotFoundException, UnsupportedEncodingException {
+	public static void main(String[]args) throws RiotApiException, IOException {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				//Turn off metal's use of bold fonts

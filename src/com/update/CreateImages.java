@@ -11,43 +11,69 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import com.resources.ToArrayLists;
+
 public class CreateImages {
-	
+
 	public static void main(String[]args) throws NumberFormatException, IOException {
+		ToArrayLists.main(args);
 		parseItemIdsToImage(args[0]);
+		parseChampIdsToImage(args[0]);
 	}
-	
-	public static void parseItemIdsToImage(String version) throws NumberFormatException, IOException {
-		File db = new File("itemIds.txt");
-		BufferedReader rd = new BufferedReader(new FileReader(db));
-		String line = rd.readLine();
-		while((line = rd.readLine()) != null) {
-			if(!line.equals("") && Character.isDigit(line.charAt(0))) {
-				URL url = null;
-				try {
-					url = new URL("http://ddragon.leagueoflegends.com/cdn/" + version + "/img/item/" +  line + ".png");
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				}
-				InputStream in = new BufferedInputStream(url.openStream());
-				ByteArrayOutputStream out = new ByteArrayOutputStream();
-				byte[] buf = new byte[1024];
-				int n = 0;
-				while (-1!=(n=in.read(buf)))
-				{
-					out.write(buf, 0, n);
-				}
-				out.close();
-				in.close();
-				byte[] response = out.toByteArray();
-				FileOutputStream fos = new FileOutputStream(".\\itemIds\\" + line + ".jpg");
-				fos.write(response);
-				fos.close();
+	//http://ddragon.leagueoflegends.com/cdn/5.14.1/img/champion/Aatrox.png
+	public static void parseChampIdsToImage(String version) throws NumberFormatException, IOException {
+		for(String name: ToArrayLists.championKeys) {
+			URL url = null;
+			try {
+				url = new URL("http://ddragon.leagueoflegends.com/cdn/" + version + "/img/champion/" +  name + ".png");
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
 			}
+			InputStream in = new BufferedInputStream(url.openStream());
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			byte[] buf = new byte[1024];
+			int n = 0;
+			while (-1!=(n=in.read(buf)))
+			{
+				out.write(buf, 0, n);
+			}
+			out.close();
+			in.close();
+			byte[] response = out.toByteArray();
+			FileOutputStream fos = new FileOutputStream(".\\champIds\\" + name + ".jpg");
+			fos.write(response);
+			fos.close();
 		}
-		rd.close();
 	}
-	
+
+	public static void parseItemIdsToImage(String version) throws NumberFormatException, IOException {
+
+		for(String id: ToArrayLists.items) {
+
+			URL url = null;
+			try {
+				url = new URL("http://ddragon.leagueoflegends.com/cdn/" + version + "/img/item/" +  id + ".png");
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+			InputStream in = new BufferedInputStream(url.openStream());
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			byte[] buf = new byte[1024];
+			int n = 0;
+			while (-1!=(n=in.read(buf)))
+			{
+				out.write(buf, 0, n);
+			}
+			out.close();
+			in.close();
+			byte[] response = out.toByteArray();
+			FileOutputStream fos = new FileOutputStream(".\\itemIds\\" + id + ".jpg");
+			fos.write(response);
+			fos.close();
+		}
+
+	}
+
 	public static void saveImage(String imageUrl, String destinationFile) throws IOException {
 		URL url = new URL(imageUrl);
 		InputStream is = null;

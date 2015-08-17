@@ -4,60 +4,44 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map.Entry;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.manager.ItemManager;
 
 public class ToArrayLists {
-	public static ArrayList<Integer> items = new ArrayList<Integer>();
-	public static ArrayList<String> itemNames = new ArrayList<String>();
-	public static String[] champNames;
+	public static ArrayList<String> items = new ArrayList<String>();
 	public static ArrayList<String> championKeys = new ArrayList<String>();
-	public static ArrayList<String> champIds = new ArrayList<String>();
 	public static int championId = 62;
 	public static void main(String[]args) throws IOException {
 		parseItemListToArrayList();
-		parseChampIdsToArrayList();
 		parseChampNamesToArrayList();
-		parseItemListNameIdToArrayList();
 	}
 
-	public static void parseChampIdsToArrayList() throws IOException {
-		File db = new File("championIds.txt");
-		BufferedReader rd = new BufferedReader(new FileReader(db));
-		String line = "";
-		while((line = rd.readLine()) != null) {
-			champIds.add(line);
-		}
-		rd.close();
-	}
 	public static void parseChampNamesToArrayList() throws IOException {
-		File db = new File("championNames.txt");
+		File db = new File("champions.json");
 		BufferedReader rd = new BufferedReader(new FileReader(db));
-		String line = "";
-		while((line = rd.readLine()) != null) {
-			System.out.println(line);
-			championKeys.add(line);
+		JsonParser parser = new JsonParser();
+		JsonObject champs = (JsonObject) parser.parse(rd.readLine());
+		for(Entry<String, JsonElement> name : ((JsonObject) champs.get("data")).entrySet()) {
+			championKeys.add(name.getKey());
 		}
 		rd.close();
 	}
 
 	public static void parseItemListToArrayList() throws NumberFormatException, IOException {
-		File db = new File("itemIds.txt");
+		File db = new File("items.json");
 		BufferedReader rd = new BufferedReader(new FileReader(db));
-		String line = rd.readLine();
-		while((line = rd.readLine()) != null) {
-			items.add(Integer.parseInt(line));
+		JsonParser parser = new JsonParser();
+		JsonObject champs = (JsonObject) parser.parse(rd.readLine());
+		for(Entry<String, JsonElement> name : ((JsonObject) champs.get("data")).entrySet()) {
+			items.add(name.getKey());
 		}
 		rd.close();
 	}
-	
-	public static void parseItemListNameIdToArrayList() throws NumberFormatException, IOException {
-		File db = new File("itemNameIds.txt");
-		BufferedReader rd = new BufferedReader(new FileReader(db));
-		String line = rd.readLine();
-		while((line = rd.readLine()) != null) {
-			itemNames.add(line);
-		}
-		rd.close();
-	}
-	
+
 }
 

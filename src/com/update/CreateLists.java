@@ -14,11 +14,11 @@ import com.google.gson.stream.JsonReader;
 public class CreateLists {
 	public static String[] champNames;
 	public static void createChampionListFromJsonURL() throws MalformedURLException, IOException {
-		Scanner fromUrl = new Scanner(new URL("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=tags&api_key=449b1ef2-d95b-4cb0-afe5-2b45b159f26d").openStream(), "UTF-8");
+		Scanner fromUrl = new Scanner(new URL("https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=tags&api_key=" + Update.API_KEY).openStream(), "UTF-8");
 		String out = fromUrl.useDelimiter("\\A").next();
 		champNames = out.split("},");
 		File champIds = null;
-
+		System.out.println(champNames);
 		champIds = new File(".\\champions.json");
 		PrintWriter writer = new PrintWriter(champIds);
 		writer.println(out);
