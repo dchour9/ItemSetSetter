@@ -57,11 +57,13 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+Eclipse Files
+# =========================
+.classpath
+.project
+
 # Custom Files
 # =========================
-ItemSetGUI.java
-Update.java
-CreateDBs.java
 Champions.json
 Items.json
 rec.json
