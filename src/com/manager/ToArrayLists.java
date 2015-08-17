@@ -1,16 +1,14 @@
-package com.resources;
+package com.manager;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map.Entry;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.manager.ItemManager;
 
 public class ToArrayLists {
 	public static ArrayList<String> items = new ArrayList<String>();

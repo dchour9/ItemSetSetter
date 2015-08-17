@@ -7,10 +7,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
-
 public class CreateLists {
 	public static String[] champNames;
 	public static void createChampionListFromJsonURL() throws MalformedURLException, IOException {

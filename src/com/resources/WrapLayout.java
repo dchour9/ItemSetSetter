@@ -9,6 +9,11 @@ import javax.swing.SwingUtilities;
  */
 public class WrapLayout extends FlowLayout
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2044056804858711822L;
+	@SuppressWarnings("unused")
 	private Dimension preferredLayoutSize;
 
 	/**

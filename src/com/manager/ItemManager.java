@@ -1,6 +1,5 @@
 package com.manager;
 
-import com.resources.ToArrayLists;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -11,11 +10,9 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
@@ -133,7 +130,7 @@ public class ItemManager extends JPanel implements ActionListener  {
 		JButton b = new JButton();
 
 		try {
-			com.resources.ToArrayLists.main(new String[0]);
+			com.manager.ToArrayLists.main(new String[0]);
 		} catch (NumberFormatException e) {
 		} catch (IOException e) {
 		}
