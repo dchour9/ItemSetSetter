@@ -61,6 +61,7 @@ Eclipse Files
 # =========================
 .classpath
 .project
+.settings/
 
 # Custom Files
 # =========================
