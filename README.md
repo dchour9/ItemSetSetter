@@ -25,13 +25,12 @@ You cannot currently choose the map.
 # How to use
 Download the download.zip file. The files contained within are:  
 
-` items.json ` A json file containing items  
-` champions.json ` A json file containing champions  
-` maps.json  ` A json file containing maps  
-```
-Item Images  
-Champion Images  
-Manager.jar  
-README.md
-LICENSE.txt
-```
+`items.json` A json file containing items  
+`champions.json` A json file containing champions  
+`maps.json` A json file containing maps  
+`Manager.jar` The actual application  
+` Item Images`  
+` Champion Images`  
+`README.md`  
+`LICENSE.txt`  
+
