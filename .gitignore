@@ -63,5 +63,8 @@ Update.java
 CreateDBs.java
 Champions.json
 Items.json
+rec.json
+src/com/resources/
+drc/com/update/
 
 /bin/
