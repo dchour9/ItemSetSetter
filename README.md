@@ -15,7 +15,7 @@ You cannot yet edit item sets; you may only create them.
 * Small tweaks [WIP]
 
 # How to use
-Download the download.zip file. The files contained within are:  
+Download the `download.zip` file. The files contained within are:  
 
 `items.json` A json file containing items  
 `champions.json` A json file containing champions  
