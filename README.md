@@ -1,6 +1,3 @@
-# This repository is not up to date. The up-to-date files are on my desktop waiting to be pushed. The repository is bugged and will not allow syncing or pushing.
-
-
 # ItemSetSetter
 Item Set Manager for League of Legends. This allows the user to create and edit item sets outside of the LoL client.
 Currently you can choose multiple champions to set the item sets and choose any item.  
